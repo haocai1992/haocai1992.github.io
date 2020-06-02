@@ -1,18 +1,13 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hello! My name is Hao Cai.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+I am a computational biologist in Toronto, working at the intersection of data science and biology. My current focus is to apply machine learning in the understanding of an important biological process (["biomolecular condensation"](https://en.wikipedia.org/wiki/Biomolecular_condensate#:~:text=Biomolecular%20condensates%20are%20a%20class,controlled%20by%20a%20bounding%20membrane.)) that underlies many cellular functions and neurological diseases.
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+My background is biophysics. I completed PhD at Nanyang Technological University in Singapore, where I studied a protein family called DgHBP, which forms a remarkable material in nature -- [the beak of jumbo squid](https://www.ntu.edu.sg/home/ali.miserez/Nonmineral.html). I was fascinated by how sophisticated the protein encodings are controlling their behaviours, and therefore moved from lab work to coding.
 
-
-[jekyll-organization]: https://github.com/jekyll
+Aside from science, I’m also interested in the business world. As a former student entrepreneur, I kept a close eye on many industries (e-commmerce, healthcare, education, ...) and new startups, and I am using my data science skills to conduct several industry analysis projects, which you can find in this blog.

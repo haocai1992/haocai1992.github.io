@@ -4,3 +4,4 @@
 
 layout: home
 ---
+This is a blog about ML applications in biology and business.
