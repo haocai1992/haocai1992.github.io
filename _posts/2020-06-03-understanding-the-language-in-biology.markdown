@@ -22,7 +22,6 @@ However it is extremely hard to understand this biological language, because the
 In the recent years, the application of machine learning and NLP techniques in the study of proteins has attracted a lot of attention. In these studies, "word embeddings" of protein sequences were applied in order to address the unstructuredness of these sequences. There are many methods that have been developed now, and I want to introduce a few of them here.
 
 ## One-hot encoding
-
 The simplist embedding system in NLP is one-hot encoding. It could also be applied in protein sequence. For example, If I want to encode the protein sequence GHGLY, then I can encode each position with 19 zeros and one 1. As simple as it seems, one-hot encoding can actually achieve a lot. In certain tasks such as sequence clustering or protein classification, one-hot encoding can be quickly implemented and provide a lot of insights!
 
 <p align="center">
