@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Visulizing AI startups in drug discovery: An interactive dashboard"
+title:  "Visualizing AI startups in drug discovery"
 date:   2020-06-28 12:48:06 -0400
 categories: Business
 ---
