@@ -4,4 +4,4 @@
 
 layout: home
 ---
-Exploring data science, biology and business analysis.
+Exploring big data, machine learning and others.
