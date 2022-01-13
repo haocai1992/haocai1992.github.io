@@ -7,7 +7,7 @@ categories: Data Science
 
 Spark is a very popular open-source big data framework that is being used by many companies in the industry. Here I want to show you how to set up Spark environment in a Linux machine (I am using Ubuntu 20.04.3).
 
-# Installation
+## Installation
 Here is the list of things we need to install:
 1. JDK
 2. IDEA
@@ -16,7 +16,7 @@ Here is the list of things we need to install:
 5. PySpark (optional)
 6. Hadoop
 
-## 1. JDK
+### 1. JDK
 JDK is short for Java Development Kit, the development environment for Java. Spark is written in Scala, a language that is very similar to Java and also runs on JVM (Java Virtual Machine), so we need to install JDK first. Here I installed JDK 11.0.13.
 
 To install JDK, run:  
@@ -36,12 +36,12 @@ OpenJDK Runtime Environment (build 11.0.13+8-Ubuntu-0ubuntu1.20.04)
 OpenJDK 64-Bit Server VM (build 11.0.13+8-Ubuntu-0ubuntu1.20.04, mixed mode, sharing)
 ```
 
-## 2. IDEA
+### 2. IDEA
 IntelliJ IDEA is the most popular IDE for Java/Scala. We need it for writing and running code.
 
 Download and install the latest version of IDEA here: https://www.jetbrains.com/idea/download/#section=linux. I selected the free community version.
 
-## 3. Scala
+### 3. Scala
 Scala is the language that is commonly used to write Spark programs (along with Python!). If you want to learn how to code in Scala, I highly recommend this course: https://www.coursera.org/specializations/scala. If you don't know Scala, you can use Python, but install Scala anyway!
 
 Download Scala here: https://www.scala-lang.org/download/scala2.html. You can either select "Download the Scala binaries for unix" and unpack the binaries locally, or install Scala using IDEA by selecting "[Getting Started with Scala in IntelliJ](https://docs.scala-lang.org/getting-started/intellij-track/getting-started-with-scala-in-intellij.html)". I did the latter and installed **Scala 2.12.11** in my machine.
@@ -50,7 +50,7 @@ Download Scala here: https://www.scala-lang.org/download/scala2.html. You can ei
 <img src="/imgs/2022-01-11-how-to-set-up-your-environment-for-spark/scala-version.png">
 </p>
 
-## 4. Spark
+### 4. Spark
 Download Spark here: https://spark.apache.org/downloads.html. Here I selected the latest release (3.2.0) pre-built for Apache Hadoop 3.3.
 
 Then unpack the package and move it to your preferred folder:
@@ -76,13 +76,13 @@ If you see the below result, it means you're all set for Spark!
 <img src="/imgs/2022-01-11-how-to-set-up-your-environment-for-spark/spark-shell.png">
 </p>
 
-## 5. PySpark (optional)
+### 5. PySpark (optional)
 In a nutshell, PySpark is the Python version of Spark. You can write Spark code in Python-style with PySpark without having to learn Scala. To install PySpark use [PyPI](https://pypi.org/project/pyspark/), run:
 ```
 $ pip install pyspark
 ```
 
-## 6. Hadoop
+### 6. Hadoop
 Hadoop is the "previous generation" of big data framework before Spark. As awesome as Spark is, it was actually built on top of Hadoop in a sense and still relies on components from Hadoop. More details on their relationship can be found in [this article](https://www.geeksforgeeks.org/difference-between-hadoop-and-spark/). Here, I want to run Spark jobs on a Hadoop cluster and use YARN (Hadoop's resource management and scheduling tool) and HDFS (Hadoop's data file system) because they are really easy to use, so installing Hadoop is a must.
 
 To install Hadoop, download here: https://hadoop.apache.org/releases.html. Here I selected 3.2.2 version.
@@ -112,9 +112,9 @@ If you see the below result, it means hadoop is successfully installed!
 <img src="/imgs/2022-01-11-how-to-set-up-your-environment-for-spark/hadoop-version.png">
 </p>
 
-# Configuration
-## 1. Configure Hadoop distributed mode (HDFS and YARN setup)
-### 1.1 SSH authentication setup
+## Configuration
+### 1. Configure Hadoop distributed mode (HDFS and YARN setup)
+#### 1.1 SSH authentication setup
 First you need to make sure you have Java in your machine by following the steps in "Installation". Then we need to set up the distributed authentication key-pairs so that the master node can easily connect to worker nodes. Install SSH on your machine with:
 ```
 $ sudo apt install openssh-client
@@ -134,7 +134,7 @@ Run `ssh localhost` to check if you still log-in key. If you see below, your SSH
 <img src="/imgs/2022-01-11-how-to-set-up-your-environment-for-spark/ssh-login.png">
 </p>
 
-### 1.2 NameNode location setup
+#### 1.2 NameNode location setup
 Update your `/hadoop/etc/hadoop/core-site.xml` to set up NameNode location:
 ```
 <configuration>
@@ -153,7 +153,7 @@ Update your `/hadoop/etc/hadoop/core-site.xml` to set up NameNode location:
 </configuration>
 
 ```
-### 1.3 HDFS path setup
+#### 1.3 HDFS path setup
 Update your `hadoop/etc/hadoop/hdfs-site.xml` to set up HDFS path:
 ```
 <configuration>
@@ -174,7 +174,7 @@ Update your `hadoop/etc/hadoop/hdfs-site.xml` to set up HDFS path:
 
 ```
 
-### 1.5 Configure YARN
+#### 1.4 Configure YARN
 First, edit `hadoop/etc/hadoop/mapred-site.xml` to set YARN as the default framework for MapReduce operations:
 ```
 <configuration>
@@ -209,7 +209,7 @@ Then, edit `hadoop/etc/hadoop/yarn-site.xml`:
 </property>
 ```
 
-### 1.4 Format HDFS
+#### 1.5 Format HDFS
 After the setup, you need to format HDFS by running:
 ```
 $ hadoop namenode -format
@@ -219,7 +219,7 @@ If you see below, the formatting is done!
 <img src="/imgs/2022-01-11-how-to-set-up-your-environment-for-spark/ssh-login.png">
 </p>
 
-### 1.5 Run HDFS and YARN
+#### 1.6 Run HDFS and YARN
 Now you can run HDFS and YARN services! Go to `/usr/local/hadoop/hadoop-3.2.2/bin` and run:
 ```
 $ start-all.sh
@@ -234,8 +234,8 @@ After all you jobs are finished, you can terminate hadoop service by going to `/
 $ stop-all.sh
 ```
 
-## 2. Create and run Scala code in IDEA
-### 2.1 Create new Scala project
+### 2. Create and run Scala code in IDEA
+#### 2.1 Create new Scala project
 As I mentioned earlier, IDEA is a very popular IDE for Scala. One reason for that is that it's super easy to set up the development environment for Scala projects with IDEA. Here is how:
 
 First, open IntelliJ IDEA once you downloaded it. Click **File -> New -> Project**. Select **Scala -> sbt** and click **Next**:
@@ -274,7 +274,7 @@ The final four lines add Spark packages as your Scala dependencies. Once your ed
 <img src="/imgs/2022-01-11-how-to-set-up-your-environment-for-spark/scala-idea-setup-4.png">
 </p>
 
-### 2.2 Create and run example Scala/Spark script
+#### 2.2 Create and run example Scala/Spark script
 Now we can write some Scala code in this project. Go to **src -> main -> scala** directory on the left pane, right click and select **New -> Scala Class**, then select **Object** and enter class name as **Demo**, click **OK**.
 
 <p align="center">
@@ -325,7 +325,7 @@ What this piece of code does is a word count of three sentences: "Hello World Ja
 
 And that's it! Now you have your first Spark program running!
 
-### 2.3 Package Scala script to jar file
+#### 2.3 Package Scala script to jar file
 In order to submit Spark jobs written in Scala, you have to package your Scala code to an executable Jar file. Here is how to do it with our word-count example.
 
 Click **File -> Project Structure -> Artifacts -> + -> JAR -> From modules with dependencies**.
