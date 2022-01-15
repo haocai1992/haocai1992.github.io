@@ -87,7 +87,7 @@ We mainly use two data files:
 ## 4. Runnning in Spark
 
 ### 4.1 Clone code from Github
-Before running in Spark, clone code from my [Github Repository](https://github.com/haocai1992) to your local directory using:
+Before running in Spark, clone code from my [Github Repository](https://github.com/haocai1992/MovieRecommender) to your local directory using:
 ```
 git clone https://github.com/haocai1992/MovieRecommender.git
 ```
