@@ -61,19 +61,19 @@ OpenJDK 64-Bit Server VM (build 11.0.13+8-Ubuntu-0ubuntu1.20.04, mixed mode, sha
 ### 2. IDEA
 IntelliJ IDEA is the most popular IDE for Java/Scala. We need it for writing and running code.
 
-Download and install the latest version of IDEA here: https://www.jetbrains.com/idea/download/#section=linux. I selected the free community version.
+Download and install the latest version of IDEA here: [https://www.jetbrains.com/idea/download/#section=linux](https://www.jetbrains.com/idea/download/#section=linux). I selected the free community version.
 
 ### 3. Scala
-Scala is the language that is commonly used to write Spark programs (along with Python!). If you want to learn how to code in Scala, I highly recommend this course: https://www.coursera.org/specializations/scala. If you don't know Scala, you can use Python, but install Scala anyway!
+Scala is the language that is commonly used to write Spark programs (along with Python!). If you want to learn how to code in Scala, I highly recommend this course: [https://www.coursera.org/specializations/scala](https://www.coursera.org/specializations/scala). If you don't know Scala, you can use Python, but install Scala anyway!
 
-Download Scala here: https://www.scala-lang.org/download/scala2.html. You can either select "Download the Scala binaries for unix" and unpack the binaries locally, or install Scala using IDEA by selecting "[Getting Started with Scala in IntelliJ](https://docs.scala-lang.org/getting-started/intellij-track/getting-started-with-scala-in-intellij.html)". I did the latter and installed **Scala 2.12.11** in my machine.
+Download Scala here: [https://www.scala-lang.org/download/scala2.html](https://www.scala-lang.org/download/scala2.html). You can either select "Download the Scala binaries for unix" and unpack the binaries locally, or install Scala using IDEA by selecting "[Getting Started with Scala in IntelliJ](https://docs.scala-lang.org/getting-started/intellij-track/getting-started-with-scala-in-intellij.html)". I did the latter and installed **Scala 2.12.11** in my machine.
 
 <p align="center">
 <img src="/imgs/2022-01-11-how-to-set-up-your-environment-for-spark/scala-version.png">
 </p>
 
 ### 4. Spark
-Download Spark here: https://spark.apache.org/downloads.html. Here I selected the latest release (3.2.0) pre-built for Apache Hadoop 3.3.
+Download Spark here: [https://spark.apache.org/downloads.html](https://spark.apache.org/downloads.html). Here I selected the latest release (3.2.0) pre-built for Apache Hadoop 3.3.
 
 Then unpack the package and move it to your preferred folder:
 ```
@@ -85,7 +85,7 @@ Then you need to modify your bash configuration file (`~/.bashrc` or `~/.bash_pr
 export SPARK_HOME=/opt/spark
 export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 ```
-Finally you need to run the configuration file agnain to make it work:
+Finally you need to run the configuration file again to make it work:
 ```
 $ source ~/.bashrc
 ```
@@ -107,7 +107,7 @@ $ pip install pyspark
 ### 6. Hadoop
 Hadoop is the "previous generation" of big data framework before Spark. As awesome as Spark is, it was actually built on top of Hadoop in a sense and still relies on components from Hadoop. More details on their relationship can be found in [this article](https://www.geeksforgeeks.org/difference-between-hadoop-and-spark/). Here, I want to run Spark jobs on a Hadoop cluster and use YARN (Hadoop's resource management and scheduling tool) and HDFS (Hadoop's data file system) because they are really easy to use, so installing Hadoop is a must.
 
-To install Hadoop, download here: https://hadoop.apache.org/releases.html. Here I selected 3.2.2 version.
+To install Hadoop, download here: [https://hadoop.apache.org/releases.html](https://hadoop.apache.org/releases.html). Here I selected 3.2.2 version.
 
 Then unpack the package and move it to your preferred folder:
 ```
@@ -121,7 +121,7 @@ export HADOOP_PREFIX=$HADOOP_HOME
 export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 ```
-Then run the configuration file agnain to make it work:
+Then run the configuration file again to make it work:
 ```
 $ source ~/.bashrc
 ```
