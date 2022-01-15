@@ -21,7 +21,7 @@
 title: Hao's Blog
 email: haocai3@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Machine Learning in Biology & Business
+  Big Data, ML and others
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: haocai_3
