@@ -117,7 +117,7 @@ $ hadoop fs -ls -h /user/caihao/movie
 ```
 You will see your model here:
 <p align="center">
-<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/spark-recommender-train-m.png"></p>
+<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/spark-recommender-train.png"></p>
 
 ### 4.4 Generating recommendations in Spark
 Recommend movies for `userID=100` in Spark using:
@@ -126,7 +126,7 @@ $ spark-submit --driver-memory 512m --executor-cores 2 --class Recommend --maste
 ```
 You will see this output:
 <p align="center">
-<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/spark-recommend-movie-m.png"></p>
+<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/spark-recommend-movie.png"></p>
 
 Or recommend users for `movieID=200` in Spark using:
 ```
@@ -134,7 +134,7 @@ Or recommend users for `movieID=200` in Spark using:
 ```
 You will see this output:
 <p align="center">
-<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/spark-recommend-user-m.png"></p>
+<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/spark-recommend-user.png"></p>
 
 
 ## 5. Running PySpark version in Databricks
@@ -142,7 +142,7 @@ If you don't know Scala, I also created a Python version of the recommendation s
 <p align="center">
 <img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/pyspark-databricks.png"></p>
 
-Check it out here: [my Databricks notebook](https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/1453840335288608/1737910144074584/970786577303733/latest.html).
+Check my code here: [my Databricks notebook](https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/1453840335288608/1737910144074584/970786577303733/latest.html).
 
 To find out more about how to create a cluster on Databricks and run Spark, check out [this tutorial](https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/346304/2168141618055043/484361/latest.html).
 
@@ -238,11 +238,11 @@ val recommendU = model.recommendUsers(product=inputMovieID, num=10)
 ```
 
 ## 8. Summary
-And there you go, we have built a recommendataion system using Scala + Spark + Hadoop (with PySpark + Databricks)! I hope you found this post useful.
+And there you go, we have built a recommendataion system using Scala + Spark + Hadoop (with PySpark + Databricks), Congratualations! I hope you found this post useful.
 
 ## Contact
 * **Author**: Hao Cai
-* **Email**: haocai3@gmail.com
-* **Github**: https://github.com/haocai1992
-* **Linkedin**: https://www.linkedin.com/in/haocai1992/
+* **Email**: [haocai3@gmail.com](haocai3@gmail.com)
+* **Github**: [https://github.com/haocai1992](https://github.com/haocai1992)
+* **Linkedin**: [https://www.linkedin.com/in/haocai1992/](https://www.linkedin.com/in/haocai1992/)
 
