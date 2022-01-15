@@ -5,6 +5,28 @@ date:   2022-01-11 18:48:09 -0400
 categories: Data Science
 ---
 
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Installation](#installation)
+  - [1. JDK](#1-jdk)
+  - [2. IDEA](#2-idea)
+  - [3. Scala](#3-scala)
+  - [4. Spark](#4-spark)
+  - [5. PySpark (optional)](#5-pyspark-optional)
+  - [6. Hadoop](#6-hadoop)
+- [Configuration](#configuration)
+  - [1. Configure Hadoop distributed mode (HDFS and YARN setup)](#1-configure-hadoop-distributed-mode-hdfs-and-yarn-setup)
+    - [1.1 SSH authentication setup](#11-ssh-authentication-setup)
+    - [1.2 NameNode location setup](#12-namenode-location-setup)
+    - [1.3 HDFS path setup](#13-hdfs-path-setup)
+    - [1.4 Configure YARN](#14-configure-yarn)
+    - [1.5 Format HDFS](#15-format-hdfs)
+    - [1.6 Run HDFS and YARN](#16-run-hdfs-and-yarn)
+  - [2. Create and run Scala code in IDEA](#2-create-and-run-scala-code-in-idea)
+    - [2.1 Create new Scala project](#21-create-new-scala-project)
+    - [2.2 Create and run example Scala/Spark script](#22-create-and-run-example-scalaspark-script)
+    - [2.3 Package Scala script to jar file](#23-package-scala-script-to-jar-file)
+
 Spark is a very popular open-source big data framework that is being used by many companies in the industry. Here I want to show you how to set up Spark environment in a Linux machine (I am using Ubuntu 20.04.3).
 
 ## Installation
@@ -89,8 +111,8 @@ To install Hadoop, download here: https://hadoop.apache.org/releases.html. Here 
 
 Then unpack the package and move it to your preferred folder:
 ```
-$ tar -zxvf spark-3.2.0-bin-hadoop3.2.tgz
-$ mv spark-3.2.0-bin-hadoop3.2 /usr/local/hadoop/
+$ tar -zxvf hadoop-3.2.2.tar.gz
+$ mv hadoop-3.2.2.tar.gz /usr/local/hadoop/
 ```
 Then you need to modify your bash configuration file (`~/.bashrc` or `~/.bash_profile` or `~/.zshrc`) and add Hadoop to your PATH:
 ```
