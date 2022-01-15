@@ -8,8 +8,8 @@ categories: Data Science
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [1. Introduction to recommendation algorithms](#1-introduction-to-recommendation-algorithms)
-  - [1.1 Different recommendataion algorithms](#11-different-recommendataion-algorithms)
+- [1. Introduction to recommendation system](#1-introduction-to-recommendation-system)
+  - [1.1 Different recommendataion system algorithms](#11-different-recommendataion-system-algorithms)
   - [1.2 Collaborative filtering and Spark ALS](#12-collaborative-filtering-and-spark-als)
 - [2. System setup](#2-system-setup)
 - [3. Dataset](#3-dataset)
@@ -18,32 +18,34 @@ categories: Data Science
   - [4.2 Preparing data in HDFS](#42-preparing-data-in-hdfs)
   - [4.3 Train recommendataion model in Spark](#43-train-recommendataion-model-in-spark)
   - [4.4 Generating recommendations in Spark](#44-generating-recommendations-in-spark)
-- [5. Recommendation system design](#5-recommendation-system-design)
-- [6. Implementation](#6-implementation)
-  - [6.1 Training ALS model - `RecommenderTrain.scala`](#61-training-als-model---recommendertrainscala)
-    - [6.1.1 `prepareData`](#611-preparedata)
-    - [6.1.2 `ALS.train`](#612-alstrain)
-    - [6.1.3 `saveModel`](#613-savemodel)
-  - [6.2 Generating recommendations - `Recommend.scala`](#62-generating-recommendations---recommendscala)
-    - [6.2.1 `prepareData`](#621-preparedata)
-    - [6.2.2 `MatrixFactorizationModel.load`](#622-matrixfactorizationmodelload)
-    - [6.2.3 `model.recommendProducts`](#623-modelrecommendproducts)
-    - [6.2.4 `model.recommendUsers`](#624-modelrecommendusers)
-- [7. Implementation using PySpark + Databricks](#7-implementation-using-pyspark--databricks)
+- [5. Running PySpark version in Databricks](#5-running-pyspark-version-in-databricks)
+- [6. Recommendation system design](#6-recommendation-system-design)
+- [7. Implementation](#7-implementation)
+  - [7.1 Training ALS model - `RecommenderTrain.scala`](#71-training-als-model---recommendertrainscala)
+    - [7.1.1 `prepareData`](#711-preparedata)
+    - [7.1.2 `ALS.train`](#712-alstrain)
+    - [7.1.3 `saveModel`](#713-savemodel)
+  - [7.2 Generating recommendations - `Recommend.scala`](#72-generating-recommendations---recommendscala)
+    - [7.2.1 `prepareData`](#721-preparedata)
+    - [7.2.2 `MatrixFactorizationModel.load`](#722-matrixfactorizationmodelload)
+    - [7.2.3 `model.recommendProducts`](#723-modelrecommendproducts)
+    - [7.2.4 `model.recommendUsers`](#724-modelrecommendusers)
+- [8. Summary](#8-summary)
+- [Contact](#contact)
 
 Recommendation system is a widely used machine learning technique that has many applications in E-commerce (Amazon, Alibaba), video streaming (Netflix, Disney+), social network (Facebook, Linkedin) and many other areas. Because of the large amount of data in those services, nowadays most of industry-level recommendation systems are built in big data frameworks like Spark and Hadoop. So in this blog I want to show you how I built a movie recomendation system using Scala, Spark and Hadoop.
 
-## 1. Introduction to recommendation algorithms
-### 1.1 Different recommendataion algorithms
-Recommendataion algorithms can be categorized into two main types: content-based recommendataion and collaborative filtering. Below is a summary table describing their differences.
+## 1. Introduction to recommendation system
+### 1.1 Different recommendataion system algorithms
+Recommendataion system algorithms can be categorized into two main types: content-based recommendataion and collaborative filtering. Below is a summary table describing their differences.
 
 | |Content-based recommendataion | Collaborative filtering |
 |--|-----------|--------------|
 |Description|Utilizes product characteristics to recommend similar products to what a user previously liked.|Predicts the interest of a user by collecting preference information from many other users.|
 |Assumption|If person P1 and person P2 have the same opinion on product D1, then P1 is more likely to have the same opinion on product D2 with P2 than with a random chosen person Px.|If person P likes product D1 which has a collection of attributes, he/she is more likely to like product D2 which shares those attributes than product D3 which doesn't.|
 |Example|news/article recommendataion|movie recommendataion, Amazon product recommendation|
-|Advantages|<ul><li>The model doesn't need any user data input, so easier to scale.</li><li>Capable of catching niche items with feature engineering.</li></ul>|<ul><li>No domain knowledge needed, highly transferrable model.</li><li>Capable of helping users discover new interests.</li></ul>|
-|Disadvantages|<ul><li>Requires domain knowledge.</li><li>Limited ability to expand user's interests.</li></ul>|<ul><li>Cold-start problem: need to work with existing data, can't handle fresh items/users.</li><li>Difficulty in expanding features for items.</li></ul>|
+|Advantages| - The model doesn't need any user data input, so easier to scale.<br /> - Capable of catching niche items with feature engineering.| - No domain knowledge needed, highly transferrable model.<br /> - Capable of helping users discover new interests.|
+|Disadvantages| - Requires domain knowledge.<br /> - Limited ability to expand user's interests.| - Cold-start problem: need to work with existing data, can't handle fresh items/users.<br /> - Difficulty in expanding features for items.|
 
 ### 1.2 Collaborative filtering and Spark ALS
 In this post, we will use collaborative filtering as the recommendation algorithm. How collaborative filtering works is this: First, we consider the ratings of all users to all items as a matrix, and this matrix can be factorized to two separate matrices, one being a user matrix where rows represent users and columns are latent factors; the other being a item matrix where rows are latent factors and columns represent items (see figure below). During this factorization process, the missing values in the ratings matrix can be filled, which serve as predictions of user ratings to items, and then we can use them to give recommendations to users.
@@ -53,7 +55,7 @@ In this post, we will use collaborative filtering as the recommendation algorith
 <br>
 <em> Matrix factorization in collaborative filtering</em></p>
 
-ALS (alternating least squares) is a mathematically optimized implementation of collaborative filtering that uses Alternating Least Squares (ALS) with Weighted-Lamda-Regularization (ALS-WR)to find optimal factor weights that minimize the least squares between predicted and actual ratings. Spark's MLLib package has a built-in ALS function, and we will use it in this post.
+[ALS (alternating least squares)](https://towardsdatascience.com/prototyping-a-recommender-system-step-by-step-part-2-alternating-least-square-als-matrix-4a76c58714a1) is a mathematically optimized implementation of collaborative filtering that uses Alternating Least Squares (ALS) with Weighted-Lamda-Regularization (ALS-WR) to find optimal factor weights that minimize the least squares between predicted and actual ratings. [Spark's MLLib package](https://spark.apache.org/docs/latest/ml-guide.html) has a [built-in ALS function](https://spark.apache.org/docs/latest/mllib-collaborative-filtering.html), and we will use it in this post.
 
 ## 2. System setup
 * Ubuntu 20.04.3
@@ -83,6 +85,7 @@ We mainly use two data files:
 * `u.item`: movies data, includes **item id**, **movie title**, **release date**, **imdb url**, etc.
 
 ## 4. Runnning in Spark
+
 ### 4.1 Clone code from Github
 Before running in Spark, clone code from my [Github Repository](https://github.com/haocai1992) to your local directory using:
 ```
@@ -90,10 +93,10 @@ git clone https://github.com/haocai1992/recommendation-system-spark.git
 ```
 Open the folder in IntelliJ IDEA. Your project structure should look like this:
 <p align="center">
-<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/recommendation-system-design.png"></p>
+<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/scala-project-structure.png"></p>
 
 ### 4.2 Preparing data in HDFS
-Befofe we start, we need to start hadoop HDFS and YARN services in terminal ([see details](https://haocai1992.github.io/data/science/2022/01/11/how-to-set-up-your-environment-for-spark.html)).
+Befofe we start, we need to start hadoop HDFS and YARN services in terminal (see how in [this post](https://haocai1992.github.io/data/science/2022/01/11/how-to-set-up-your-environment-for-spark.html)).
 ```
 $ hadoop namenode -format
 $ start-all.sh
@@ -104,7 +107,7 @@ $ hadoop fs -put ~/Downloads/ml-100k /user/caihao/movie
 ```
 
 ### 4.3 Train recommendataion model in Spark
-Train model in Spark using:
+Train a recommendation model in Spark using:
 ```
 $ spark-submit --driver-memory 512m --executor-cores 2 --class RecommenderTrain --master yarn --deploy-mode client ~/Desktop/spark_test/MovieRecommender/out/artifacts/MovieRecommender_jar/MovieRecommender.jar
 ```
@@ -112,7 +115,7 @@ Check out your trained model in HDFS using:
 ```
 $ hadoop fs -ls -h /user/caihao/movie
 ```
-You will see this:
+You will see your model here:
 <p align="center">
 <img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/spark-recommender-train-m.png"></p>
 
@@ -133,7 +136,18 @@ You will see this output:
 <p align="center">
 <img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/spark-recommend-user-m.png"></p>
 
-## 5. Recommendation system design
+
+## 5. Running PySpark version in Databricks
+If you don't know Scala, I also created a Python version of the recommendation system! It's using PySpark and runs on Databricks. 
+<p align="center">
+<img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/pyspark-databricks.png"></p>
+
+Check it out here: [my Databricks notebook](https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/1453840335288608/1737910144074584/970786577303733/latest.html).
+
+To find out more about how to create a cluster on Databricks and run Spark, check out [this tutorial](https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/346304/2168141618055043/484361/latest.html).
+
+
+## 6. Recommendation system design
 Our system design are as below.
 <p align="center">
 <img src="/imgs/2022-01-13-build-recommendation-system-using-scala-spark-and-hadoop/recommendation-system-design.png"></p>
@@ -142,11 +156,11 @@ In summary, there are two Scala objects:
  * `RecommenderTrain.scala`: reads ratings file (`u.data`), prepares data, trains ALS model and saves model.
  * `Recommender.scala`: reads movies file (`u.item`), loads ALS model, generating movie recommendations.
 
-## 6. Implementation
+## 7. Implementation
 
-### 6.1 Training ALS model - `RecommenderTrain.scala`
+### 7.1 Training ALS model - `RecommenderTrain.scala`
 `RecommenderTrain.scala` is a Scala object that contains three main methods.
-#### 6.1.1 `prepareData`
+#### 7.1.1 `prepareData`
 `prepareData` reads **ratings** data from path, parses useful fields and returns `ratingsRDD`.
 ```
 def PrepareData(sc: SparkContext, dataPath:String): RDD[Rating] = {
@@ -161,7 +175,7 @@ def PrepareData(sc: SparkContext, dataPath:String): RDD[Rating] = {
     ratingsRDD
 }
 ```
-#### 6.1.2 `ALS.train`
+#### 7.1.2 `ALS.train`
 `ALS.train` does explicit rating training of `ratingsRDD` and returns a `MatrixFactorizationModel` object.
 ```
 val model: MatrixFactorizationModel = ALS.train(ratings=ratingsRDD, rank=5, iterations=20, lambda=0.1)
@@ -175,7 +189,7 @@ Information about training parameters:
 |iterations|number of ALS calculation iterations (default=5)|
 |lambda|regularization factor (default=0.01)
 
-#### 6.1.3 `saveModel`
+#### 7.1.3 `saveModel`
 `saveModel` saves model to path.
 ```
 def saveModel(context: SparkContext, model:MatrixFactorizationModel, modelPath: String): Unit ={
@@ -192,9 +206,9 @@ def saveModel(context: SparkContext, model:MatrixFactorizationModel, modelPath: 
 ```
 
 
-### 6.2 Generating recommendations - `Recommend.scala`
+### 7.2 Generating recommendations - `Recommend.scala`
 `Recommend.scala` is a Scala object that contains four main methods.
-#### 6.2.1 `prepareData`
+#### 7.2.1 `prepareData`
 `prepareData` reads **movies** data from path, parses useful fields and returns `movieTitle`.
 ```
 def prepareData(sc: SparkContext, dataPath:String): RDD[(Int, String)] ={
@@ -207,26 +221,28 @@ def prepareData(sc: SparkContext, dataPath:String): RDD[(Int, String)] ={
     movieTitle
 }
 ```
-#### 6.2.2 `MatrixFactorizationModel.load`
+#### 7.2.2 `MatrixFactorizationModel.load`
 `MatrixFactorizationModel.load` loads ALS model from path.
 ```
 val model: MatrixFactorizationModel = MatrixFactorizationModel.load(sc=sc, path=modelPath)
 ```
-#### 6.2.3 `model.recommendProducts`
+#### 7.2.3 `model.recommendProducts`
 `model.recommendProducts` recommends movies for given userID.
 ```
 val recommendP = model.recommendProducts(user=inputUserID, num=10)
 ```
-#### 6.2.4 `model.recommendUsers`
+#### 7.2.4 `model.recommendUsers`
 `model.recommendUsers` recommends users for given itemID.
 ```
 val recommendU = model.recommendUsers(product=inputMovieID, num=10)
 ```
 
-## 7. Implementation using PySpark + Databricks
-If you don't know Scala, I also created a Python version of the recommendation system! It's using PySpark and runs on Databricks. 
+## 8. Summary
+And there you go, we have built a recommendataion system using Scala + Spark + Hadoop (with PySpark + Databricks)! I hope you found this post useful.
 
-Check it out here: https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/1453840335288608/1737910144074584/970786577303733/latest.html
-
-To find out more about how to create a cluster on Databricks and run Spark, check this: https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/346304/2168141618055043/484361/latest.html
+## Contact
+* **Author**: Hao Cai
+* **Email**: haocai3@gmail.com
+* **Github**: https://github.com/haocai1992
+* **Linkedin**: https://www.linkedin.com/in/haocai1992/
 
