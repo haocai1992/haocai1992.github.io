@@ -29,6 +29,8 @@ categories: Data Science
 
 Spark is a very popular open-source big data framework that is being used by many companies in the industry. Here I want to show you how to set up Spark environment in a Linux machine (I am using Ubuntu 20.04.3).
 
+(This article was also published on [Towards Dev](https://towardsdev.com/how-to-set-up-your-environment-for-spark-7820b84491ef).)
+
 ## Installation
 Here is the list of things we need to install:
 1. JDK

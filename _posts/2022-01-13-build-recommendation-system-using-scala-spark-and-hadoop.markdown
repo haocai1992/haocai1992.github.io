@@ -35,6 +35,8 @@ categories: Data Science
 
 Recommendation system is a widely used machine learning technique that has many applications in E-commerce (Amazon, Alibaba), video streaming (Netflix, Disney+), social network (Facebook, Linkedin) and many other areas. Because of the large amount of data in those services, nowadays most of industry-level recommendation systems are built in big data frameworks like Spark and Hadoop. So in this blog I want to show you how I built a movie recomendation system using Scala, Spark and Hadoop.
 
+(This article was also published on [Towards Data Science](https://towardsdatascience.com/build-recommendation-system-using-scala-spark-and-hadoop-d2ee35c97d3c).)
+
 ## 1. Introduction to recommendation system
 ### 1.1 Different recommendataion system algorithms
 Recommendataion system algorithms can be categorized into two main types: content-based recommendataion and collaborative filtering. Below is a summary table describing their differences.
