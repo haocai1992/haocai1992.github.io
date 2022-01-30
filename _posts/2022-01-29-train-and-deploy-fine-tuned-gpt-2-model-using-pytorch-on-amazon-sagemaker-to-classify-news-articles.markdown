@@ -306,7 +306,7 @@ All source code can be found in this Github Repo: [https://github.com/haocai1992
 
 ## 9. References
 
-- *Feature image*: Photo by [Patrick Tomasso](https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/machine-learning-news?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText). https://unsplash.com/photos/BQTHOGNHo08.
+- *Feature image*: Photo by [Patrick Tomasso](https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/machine-learning-news?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText). [https://unsplash.com/photos/BQTHOGNHo08](https://unsplash.com/photos/BQTHOGNHo08).
 - *Transformers*: [https://jalammar.github.io/illustrated-transformer/](https://jalammar.github.io/illustrated-transformer/)
 - *GPT-2 vs BERT*: [https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html](https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html)
 - *BBC News Classification dataset*: D. Greene and P. Cunningham. "Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering", Proc. ICML 2006.
