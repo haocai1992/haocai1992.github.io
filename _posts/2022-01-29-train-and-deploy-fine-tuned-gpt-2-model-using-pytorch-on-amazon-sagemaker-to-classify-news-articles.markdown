@@ -5,7 +5,7 @@ date:   2022-01-29 14:35:40 -0400
 categories: Data Science
 ---
 <p align="center">
-<img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/newspaper.jpg">
+<img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/newspaper.jpg">
 <br>
 <em> (Photo by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Patrick Tomasso</a> on <a href="https://unsplash.com/s/photos/machine-learning-news?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>)</em></p>
 
@@ -37,7 +37,7 @@ Text classification is a very common task in NLP. It can be used in many applica
 ### 1.1 Transformers: GPT-2 vs BERT
 
 <p align="center">
-<img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/transformer-design.png">
+<img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/transformer-design.png">
 <br>
 <em> (Image by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jay Alammar</a> on <a href="https://jalammar.github.io/illustrated-transformer/">"The Illustrated Transformer"</a>)</em></p>
 
@@ -66,7 +66,7 @@ The dataset we are going to use in this project is the *[BBC News Classification
 This dataset is in CSV format and it has two columns: **text** and **category**. It contains 2226 different texts, each labeled under one of 5 categories: **entertainment**, **sport**, **tech**, **business**, or **politics**.
 
 <p align="center">
-<img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/dataset.png">
+<img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/dataset.png">
 </p>
 <em> (Image by Author)</em>
 
@@ -75,7 +75,7 @@ This dataset is in CSV format and it has two columns: **text** and **category**.
 I built an [Online News Classifier](http://3.84.191.215:8501/) using [Streamlit](https://streamlit.io/) running the trained model. You can input or paste any news here, and it will generate predictions of the news category with great accuracy. As simple as this app may looks, underneath it runs a very powerful deep learning model!
 
 <p align="center">
-<img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/streamlit-app-demo.png">
+<img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/streamlit-app-demo.png">
 <br>
 <em> (Image by Author)</em></p>
 
@@ -86,7 +86,7 @@ I built an [Online News Classifier](http://3.84.191.215:8501/) using [Streamlit]
 Follow this [hands-on tutorial](https://aws.amazon.com/getting-started/hands-on/build-train-deploy-machine-learning-model-sagemaker/) from AWS to create an Amazon SageMaker notebook instance. Use "*gpt2-news-classifier*" as the **instance name**, and "*ml.t2.medium*" as the **instance type**.
 
 <p align="center">
-<img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/sagemaker-1.png">
+<img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/sagemaker-1.png">
 <br>
 <em> (Image by Author)</em></p>
 
