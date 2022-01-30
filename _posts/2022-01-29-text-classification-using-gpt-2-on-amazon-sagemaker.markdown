@@ -1,17 +1,34 @@
 ---
 layout: post
-title:  "Text Classification using GPT-2 on Amazon SageMaker"
+title:  "Train and deploy fine-tuned GPT-2 model using PyTorch on Amazon SageMaker to classify news articles"
 date:   2022-01-29 14:35:40 -0400
 categories: Data Science
 ---
 <p align="center">
 <img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/newspaper.jpg">
-</p>
-<em> (Photo by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Patrick Tomasso</a> on <a href="https://unsplash.com/s/photos/machine-learning-news?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>)</em>
+<br>
+<em> (Photo by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Patrick Tomasso</a> on <a href="https://unsplash.com/s/photos/machine-learning-news?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>)</em></p>
 
 ## Table of Contents
 
-PLACEHOLDER
+- [Table of Contents](#table-of-contents)
+- [1. Introduction](#1-introduction)
+  - [1.1 Transformers: GPT-2 vs BERT](#11-transformers-gpt-2-vs-bert)
+  - [1.2 Amazon SageMaker](#12-amazon-sagemaker)
+- [2. System Requirements](#2-system-requirements)
+- [3. Dataset](#3-dataset)
+- [4. Demo](#4-demo)
+- [5. Training and deployment of GPT-2 on SageMaker](#5-training-and-deployment-of-gpt-2-on-sagemaker)
+  - [5.1. Create an Amazon SageMaker notebook instance](#51-create-an-amazon-sagemaker-notebook-instance)
+  - [5.2. Training and deployment](#52-training-and-deployment)
+  - [5.3. *train_deploy.py*](#53-train_deploypy)
+- [6. Training on Colab Notebook](#6-training-on-colab-notebook)
+- [7. Deployment using Amazon EC2 and Docker](#7-deployment-using-amazon-ec2-and-docker)
+  - [7.1. Create an Amazon EC2 instance](#71-create-an-amazon-ec2-instance)
+  - [7.2. Running Docker container in cloud](#72-running-docker-container-in-cloud)
+- [8. Summary](#8-summary)
+- [9. References](#9-references)
+- [Contact](#contact)
 
 Text classification is a very common task in NLP. It can be used in many applications from spam filtering, sentiment analysis to customer support automation and news categorization. Using Deep Learning language models for large-scale text classification tasks has become quite popular in the industry recently, especially so with the emergence of [Transformers](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) in recent years. Because the size of these Transformer models are often too large to train on local machines, cloud computing platforms (e.g. [GCP](https://cloud.google.com/), [AWS](https://aws.amazon.com/), [Azure](https://azure.microsoft.com/), [Alibabacloud](https://us.alibabacloud.com/)) are commonly used. Therefore in this blog, I want to demonstrate how to train and deploy a fine-tuned GPT-2 model for text classification tasks using Amazon SageMaker.
 
@@ -21,8 +38,8 @@ Text classification is a very common task in NLP. It can be used in many applica
 
 <p align="center">
 <img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/transformer-design.png">
-</p>
-<em> (Image by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jay Alammar</a> on <a href="https://jalammar.github.io/illustrated-transformer/">"The Illustrated Transformer"</a>)</em>
+<br>
+<em> (Image by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jay Alammar</a> on <a href="https://jalammar.github.io/illustrated-transformer/">"The Illustrated Transformer"</a>)</em></p>
 
 [GPT-2](https://en.wikipedia.org/wiki/GPT-2) belongs to a family of deep learning models called "[Transformers](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model))". Transformers are the building block of the current state-of-the-art NLP architecture. It is impossible to explain how transformers work in one paragraph here, but to sum it up, transformers uses a "self-attention" mechanism that computes a representation of a sequence by "learning" the relationship between words at different positions in a sentence. A typical transformers design contains two parts, **encoder** and **decoders**, both working as vectorized representation of word relationships.
 
@@ -59,8 +76,8 @@ I built an [Online News Classifier](http://3.84.191.215:8501/) using [Streamlit]
 
 <p align="center">
 <img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/streamlit-app-demo.png">
-</p>
-<em> (Image by Author)</em>
+<br>
+<em> (Image by Author)</em></p>
 
 ## 5. Training and deployment of GPT-2 on SageMaker
 
@@ -70,8 +87,8 @@ Follow this [hands-on tutorial](https://aws.amazon.com/getting-started/hands-on/
 
 <p align="center">
 <img src="/imgs/2022-01-29-text-classification-using-gpt-2-on-amazon-sagemaker/sagemaker-1.png">
-</p>
-<em> (Image by Author)</em>
+<br>
+<em> (Image by Author)</em></p>
 
 ### 5.2. Training and deployment
 
@@ -296,3 +313,10 @@ All source code can be found in this Github Repo: [https://github.com/haocai1992
 - **GPT-2 for text classification**: [https://github.com/huggingface/transformers/issues/3168](https://github.com/huggingface/transformers/issues/3168)
 - **Train and deploy models on AWS SageMaker**: [https://medium.com/@thom.e.lane/streamlit-on-aws-a-fully-featured-solution-for-streamlit-deployments-ba32a81c7460](https://medium.com/@thom.e.lane/streamlit-on-aws-a-fully-featured-solution-for-streamlit-deployments-ba32a81c7460)
 - **Deploy Streamlit app on AWS EC2**: [https://medium.com/usf-msds/deploying-web-app-with-streamlit-docker-and-aws-72b0d4dbcf77](https://medium.com/usf-msds/deploying-web-app-with-streamlit-docker-and-aws-72b0d4dbcf77)
+
+## Contact
+
+- **Author**: Hao Cai
+- **Email**: [haocai3@gmail.com](haocai3@gmail.com)
+- **Github**: [https://github.com/haocai1992](https://github.com/haocai1992)
+- **Linkedin**: [https://www.linkedin.com/in/haocai1992/](https://www.linkedin.com/in/haocai1992/)

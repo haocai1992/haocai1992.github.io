@@ -33,19 +33,19 @@ categories: Data Science
 - [8. Summary](#8-summary)
 - [Contact](#contact)
 
-Recommendation system is a widely used machine learning technique that has many applications in E-commerce (Amazon, Alibaba), video streaming (Netflix, Disney+), social network (Facebook, Linkedin) and many other areas. Because of the large amount of data in those services, nowadays most of industry-level recommendation systems are built in big data frameworks like Spark and Hadoop. So in this blog I want to show you how I built a movie recomendation system using Scala, Spark and Hadoop.
+Recommendation system is a widely used machine learning technique that has many applications in E-commerce (Amazon, Alibaba), video streaming (Netflix, Disney+), social network (Facebook, Linkedin) and many other areas. Because of the large amount of data in those services, nowadays most of industry-level recommendation systems are built in big data frameworks like Spark and Hadoop. So in this blog I want to show you how I built a movie recommendation system using Scala, Spark and Hadoop.
 
 (This article was also published on [Towards Data Science](https://towardsdatascience.com/build-recommendation-system-using-scala-spark-and-hadoop-d2ee35c97d3c).)
 
 ## 1. Introduction to recommendation system
 ### 1.1 Different recommendataion system algorithms
-Recommendataion system algorithms can be categorized into two main types: content-based recommendataion and collaborative filtering. Below is a summary table describing their differences.
+Recommendataion system algorithms can be categorized into two main types: content-based recommendation and collaborative filtering. Below is a summary table describing their differences.
 
-| |Content-based recommendataion | Collaborative filtering |
+| |Content-based recommendation | Collaborative filtering |
 |--|-----------|--------------|
 |Description|Utilizes product characteristics to recommend similar products to what a user previously liked.|Predicts the interest of a user by collecting preference information from many other users.|
 |Assumption|If person P1 and person P2 have the same opinion on product D1, then P1 is more likely to have the same opinion on product D2 with P2 than with a random chosen person Px.|If person P likes product D1 which has a collection of attributes, he/she is more likely to like product D2 which shares those attributes than product D3 which doesn't.|
-|Example|news/article recommendataion|movie recommendataion, Amazon product recommendation|
+|Example|news/article recommendation|movie recommendation, Amazon product recommendation|
 |Advantages| - The model doesn't need any user data input, so easier to scale.<br /> - Capable of catching niche items with feature engineering.| - No domain knowledge needed, highly transferrable model.<br /> - Capable of helping users discover new interests.|
 |Disadvantages| - Requires domain knowledge.<br /> - Limited ability to expand user's interests.| - Cold-start problem: need to work with existing data, can't handle fresh items/users.<br /> - Difficulty in expanding features for items.|
 
@@ -240,7 +240,7 @@ val recommendU = model.recommendUsers(product=inputMovieID, num=10)
 ```
 
 ## 8. Summary
-And there you go, we have built a recommendataion system using Scala + Spark + Hadoop (with PySpark + Databricks), Congratualations! I hope you found this post useful.
+And there you go, we have built a recommendataion system using Scala + Spark + Hadoop (with PySpark + Databricks), Congratulations! I hope you found this post useful.
 
 ## Contact
 * **Author**: Hao Cai
