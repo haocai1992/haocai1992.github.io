@@ -36,20 +36,20 @@ Text classification is a very common task in NLP. It can be used in many applica
 
 ### 1.1 Transformers: GPT-2 vs BERT
 
+[GPT-2](https://en.wikipedia.org/wiki/GPT-2) belongs to a family of deep learning models called "[Transformers](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model))". Transformers are the building block of the current state-of-the-art NLP architecture. It is impossible to explain how transformers work in one paragraph here, but to sum it up, transformers uses a "self-attention" mechanism that computes a representation of a sequence by "learning" the relationship between words at different positions in a sentence. A typical transformers design contains two parts, **encoder** and **decoders**, both working as vectorized representation of word relationships.
+
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/transformer-design.png">
 <br>
 <em> (Image by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jay Alammar</a> on <a href="https://jalammar.github.io/illustrated-transformer/">"The Illustrated Transformer"</a>)</em></p>
 
-[GPT-2](https://en.wikipedia.org/wiki/GPT-2) belongs to a family of deep learning models called "[Transformers](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model))". Transformers are the building block of the current state-of-the-art NLP architecture. It is impossible to explain how transformers work in one paragraph here, but to sum it up, transformers uses a "self-attention" mechanism that computes a representation of a sequence by "learning" the relationship between words at different positions in a sentence. A typical transformers design contains two parts, **encoder** and **decoders**, both working as vectorized representation of word relationships.
-
-[GPT-2](https://en.wikipedia.org/wiki/GPT-2) and [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)) are two well-known transformer models released in 2018 and 2019, respectively. There are newer and better models released since then (for example, [RoBERTa](https://arxiv.org/abs/1907.11692) in 2019 and [GPT-3](https://en.wikipedia.org/wiki/GPT-3) in 2020), however, these two still remain very popular with a lot of industrial applications till now due to great usability and performance. The key difference between GPT-2 and BERT is that GPT-2 in its nature is a generative model while BERT isn't. That's why you can find a lot of tech blogs using BERT for text classification tasks and GPT-2 for text-generation tasks, but not much on using GPT-2 for text classification tasks. That's why I decided to use GPT-2 here - it's more challenging!
+[GPT-2](https://en.wikipedia.org/wiki/GPT-2) and [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)) are two well-known transformer models released in 2018 and 2019, respectively. There are newer and better models released since then (for example, [RoBERTa](https://arxiv.org/abs/1907.11692) in 2019 and [GPT-3](https://en.wikipedia.org/wiki/GPT-3) in 2020), however, these two still remain very popular with a lot of industrial applications till now, due to their great usability and performance. The key difference between GPT-2 and BERT is that GPT-2 in its nature is a generative model while BERT isn't. That's why you can find a lot of tech blogs using BERT for text classification tasks and GPT-2 for text-generation tasks, but not much on using GPT-2 for text classification tasks. That's why I decided to use GPT-2 here - it's more challenging!
 
 ### 1.2 Amazon SageMaker
 
-[Amazon SageMaker](https://aws.amazon.com/sagemaker/) is a great tool to train and deploy deep learning models on cloud instances with a fully-managed infrastructure provided by AWS. Within minutes, you can build, train and deploy a model in a Jupyter Notebook and don't have to worry about environment setup stuff, because it comes with many pre-built Conda environments and Docker containers. It's a huge life-saver for data scientists like me.
+[Amazon SageMaker](https://aws.amazon.com/sagemaker/) is a great tool to train and deploy deep learning models on cloud instances with a fully-managed infrastructure provided by AWS. Within minutes, you can build, train and deploy a model in a Jupyter Notebook and don't have to worry about environment setup, because it comes with many pre-built Conda environments and Docker containers. It's a huge life-saver for data scientists like me.
 
-It's worth to mention that SageMaker can also be used for [Streamlit](https://streamlit.io/) app development. This is very useful for product prototyping, because right after model training, you can directly build an app on the same instance. You will see that in this article.
+It's worth mentioning that SageMaker can also be used for [Streamlit](https://streamlit.io/) app development. This is very useful for product prototyping, because right after model training, you can directly build an app on the same instance. You will see that in this article.
 
 ## 2. System Requirements
 
@@ -67,8 +67,8 @@ This dataset is in CSV format and it has two columns: **text** and **category**.
 
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/dataset.png">
-</p>
-<em> (Image by Author)</em>
+<br>
+<em> (Image by Author)</em></p>
 
 ## 4. Demo
 
@@ -118,9 +118,9 @@ Run [this notebook](https://github.com/haocai1992/GPT2-News-Classifier/blob/main
 
 ### 5.3. *train_deploy.py*
 
-Since we are building and training a PyTorch model in this project, it is recommended by [**SageMaker Python SDK**](https://sagemaker.readthedocs.io/en/stable/frameworks/pytorch/using_pytorch.html#train-a-model-with-pytorch) to prepare a separate script to construct and store model functions used by SageMaker.
+Since we are building and training a PyTorch model in this project, it is recommended by [**SageMaker Python SDK**](https://sagemaker.readthedocs.io/en/stable/frameworks/pytorch/using_pytorch.html#train-a-model-with-pytorch) to prepare a separate `train_deploy.py` script to construct and store model functions used by SageMaker. There are two essential functions, `SimpleGPT2SequenceClassifier` and `train`.
 
-This is the `SimpleGPT2SequenceClassifier` class in *train_deploy.py* for building a classifier on top of a pre-trained GPT-2 model. The trick here is to add a linear layer on top of GPT-2's 12 layers of decoders with its output dimension equals our number of labels. In this way we can use GPT-2 to output 5 numbers which corresponds to our five news categories!
+The `SimpleGPT2SequenceClassifier` class in *train_deploy.py* is responsible for building a classifier on top of a pre-trained GPT-2 model. The trick here is to add a linear layer on top of GPT-2's 12 layers of decoders with its output dimension equals our number of labels. In this way we can use GPT-2 to output 5 numbers which corresponds to our five news categories!
 
 ```python
 class SimpleGPT2SequenceClassifier(nn.Module):
@@ -140,7 +140,7 @@ class SimpleGPT2SequenceClassifier(nn.Module):
         return linear_output
 ```
 
-This is the `train` function in *train_deploy.py* for constructing a training loop of the classifier given input data.
+The `train` function in *train_deploy.py* constructs a training loop of the classifier given input data.
 
 ```python
 def train(args):
@@ -259,11 +259,11 @@ def train(args):
 
 When it comes to training Deep Learning models on a cloud notebook, a convenient alternative to Amazon SageMaker is Google's [Colab Notebook](https://colab.research.google.com/?utm_source=scs-index#). It skips all cloud service setup as you need in AWS, and best of all, it offers free CPU/GPU instances for model training (comes with 12 hour limit though)! To use it, simply open your [Google Drive](https://drive.google.com), choose **New->More->Google Colaboratory**. If you want to use GPU to speed up the training, choose **Runtime->Change runtime type->GPU**, and you can write your code there!
 
-The [**Colab Notebook**](https://colab.research.google.com/drive/1dMTdO5vxdVX0NA2Qe7AV9WGEy8ZH67Xn?usp=sharing) for this project as well as data can be found [**here**](https://drive.google.com/drive/folders/1q_4pJKDAv21vpO232ZEyxedfpWWVx7wu?usp=sharing).
+My [**Colab Notebook**](https://colab.research.google.com/drive/1dMTdO5vxdVX0NA2Qe7AV9WGEy8ZH67Xn?usp=sharing) as well as the data can be found [**here**](https://drive.google.com/drive/folders/1q_4pJKDAv21vpO232ZEyxedfpWWVx7wu?usp=sharing).
 
 ## 7. Deployment using Amazon EC2 and Docker
 
-Although model deployment can be done within the same SageMaker Notebook for model training as I just showed, in application development practice it is often recommended to decouple training and deployment for simplicity and durability. To demonstrate this, I deployed our trained GPT-2 model using Docker on Amazon EC2 instance.
+Although model deployment can be done within a SageMaker Notebook Instance as I have just shown, in real application development practice it is often recommended to decouple training and deployment for simplicity and reproducibility. Therefore, I also deployed our trained GPT-2 model using Docker on Amazon EC2 instance.
 
 ### 7.1. Create an Amazon EC2 instance
 
@@ -282,7 +282,7 @@ After launching the EC2 instance, use SSH to connect to the instance:
 ssh -i ec2-gpt2-streamlit-app.pem ubuntu@your-instance-DNS-address.us-east-1.compute.amazonaws.com
 ```
 
-Then, copy our code into the cloud using `git`:
+Then, copy my code into the cloud using `git`:
 
 ```bash
 git clone https://github.com/haocai1992/GPT2-News-Classifier.git
@@ -300,19 +300,19 @@ Now, you can access the Streamlit app at `http://<EC2 public IP address>:8501`(E
 
 ## 8. Summary
 
-I hope you can see in this article that it's really not that complicated to train and deploy an Deep Learning model using Amazon SageMaker. In addition, there are other options even simpler, such as Google Colab training and Amazon EC2 deployment. Hope you found this post useful.
+I hope you can learn from this article that it's not complicated at all to train and deploy an Deep Learning model using Amazon SageMaker. In any case, there are even simpler alternatives, such as Google Colab training and Amazon EC2 deployment. Hope you found this post useful.
 
 All source code can be found in this Github Repo: [https://github.com/haocai1992/GPT2-News-Classifier](https://github.com/haocai1992/GPT2-News-Classifier)
 
 ## 9. References
 
-- **Feature image**: Photo by [Patrick Tomasso](https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/machine-learning-news?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText). https://unsplash.com/photos/BQTHOGNHo08.
-- **Transformers**: [https://jalammar.github.io/illustrated-transformer/](https://jalammar.github.io/illustrated-transformer/)
-- **GPT-2 vs BERT**: [https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html](https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html)
-- **BBC News Classification dataset**: D. Greene and P. Cunningham. "Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering", Proc. ICML 2006.
-- **GPT-2 for text classification**: [https://github.com/huggingface/transformers/issues/3168](https://github.com/huggingface/transformers/issues/3168)
-- **Train and deploy models on AWS SageMaker**: [https://medium.com/@thom.e.lane/streamlit-on-aws-a-fully-featured-solution-for-streamlit-deployments-ba32a81c7460](https://medium.com/@thom.e.lane/streamlit-on-aws-a-fully-featured-solution-for-streamlit-deployments-ba32a81c7460)
-- **Deploy Streamlit app on AWS EC2**: [https://medium.com/usf-msds/deploying-web-app-with-streamlit-docker-and-aws-72b0d4dbcf77](https://medium.com/usf-msds/deploying-web-app-with-streamlit-docker-and-aws-72b0d4dbcf77)
+- *Feature image*: Photo by [Patrick Tomasso](https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/machine-learning-news?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText). https://unsplash.com/photos/BQTHOGNHo08.
+- *Transformers*: [https://jalammar.github.io/illustrated-transformer/](https://jalammar.github.io/illustrated-transformer/)
+- *GPT-2 vs BERT*: [https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html](https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html)
+- *BBC News Classification dataset*: D. Greene and P. Cunningham. "Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering", Proc. ICML 2006.
+- *GPT-2 for text classification*: [https://github.com/huggingface/transformers/issues/3168](https://github.com/huggingface/transformers/issues/3168)
+- *Train and deploy models on AWS SageMaker*: [https://medium.com/@thom.e.lane/streamlit-on-aws-a-fully-featured-solution-for-streamlit-deployments-ba32a81c7460](https://medium.com/@thom.e.lane/streamlit-on-aws-a-fully-featured-solution-for-streamlit-deployments-ba32a81c7460)
+- *Deploy Streamlit app on AWS EC2*: [https://medium.com/usf-msds/deploying-web-app-with-streamlit-docker-and-aws-72b0d4dbcf77](https://medium.com/usf-msds/deploying-web-app-with-streamlit-docker-and-aws-72b0d4dbcf77)
 
 ## Contact
 
