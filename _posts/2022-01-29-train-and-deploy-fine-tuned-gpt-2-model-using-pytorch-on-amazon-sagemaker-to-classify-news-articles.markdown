@@ -41,7 +41,7 @@ Text classification is a very common task in NLP. It can be used in many applica
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/transformer-design.png">
 <br>
-<em> (Image by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jay Alammar</a> on <a href="https://jalammar.github.io/illustrated-transformer/">"The Illustrated Transformer"</a>)</em></p>
+<em>Image by <a href="https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jay Alammar</a> on <a href="https://jalammar.github.io/illustrated-transformer/">"The Illustrated Transformer"</a></em></p>
 
 [GPT-2](https://en.wikipedia.org/wiki/GPT-2) and [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)) are two well-known transformer models released in 2018 and 2019, respectively. There are newer and better models released since then (for example, [RoBERTa](https://arxiv.org/abs/1907.11692) in 2019 and [GPT-3](https://en.wikipedia.org/wiki/GPT-3) in 2020), however, these two still remain very popular with a lot of industrial applications till now, due to their great usability and performance. The key difference between GPT-2 and BERT is that GPT-2 in its nature is a generative model while BERT isn't. That's why you can find a lot of tech blogs using BERT for text classification tasks and GPT-2 for text-generation tasks, but not much on using GPT-2 for text classification tasks. That's why I decided to use GPT-2 here - it's more challenging!
 
@@ -68,7 +68,7 @@ This dataset is in CSV format and it has two columns: **text** and **category**.
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/dataset.png">
 <br>
-<em> (Image by Author)</em></p>
+<em>Image by Author</em></p>
 
 ## 4. Demo
 
@@ -77,7 +77,7 @@ I built an [Online News Classifier](http://3.84.191.215:8501/) using [Streamlit]
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/streamlit-app-demo.png">
 <br>
-<em> (Image by Author)</em></p>
+<em>Image by Author</em></p>
 
 ## 5. Training and deployment of GPT-2 on SageMaker
 
@@ -88,7 +88,7 @@ Follow this [hands-on tutorial](https://aws.amazon.com/getting-started/hands-on/
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/sagemaker-1.png">
 <br>
-<em> (Image by Author)</em></p>
+<em>Image by Author</em></p>
 
 ### 5.2. Training and deployment
 
