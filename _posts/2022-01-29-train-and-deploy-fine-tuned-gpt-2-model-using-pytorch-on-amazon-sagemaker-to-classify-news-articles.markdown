@@ -72,7 +72,7 @@ This dataset is in CSV format and it has two columns: **text** and **category**.
 
 ## 4. Demo
 
-I built an [Online News Classifier](http://3.84.191.215:8501/) using [Streamlit](https://streamlit.io/) running the trained model. You can input or paste any news here, and it will generate predictions of the news category with great accuracy. As simple as this app may looks, underneath it runs a very powerful deep learning model!
+I built an [Online News Classifier](http://44.200.231.137:8501/) using [Streamlit](https://streamlit.io/) running the trained model. You can input or paste any news here, and it will generate predictions of the news category with great accuracy. As simple as this app may looks, underneath it runs a very powerful deep learning model!
 
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/streamlit-app-demo.png">
