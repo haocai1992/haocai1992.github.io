@@ -22,7 +22,7 @@ categories: Data Science
   - [5.1. Create an Amazon SageMaker notebook instance](#51-create-an-amazon-sagemaker-notebook-instance)
   - [5.2. Training and deployment](#52-training-and-deployment)
   - [5.3. *train_deploy.py*](#53-train_deploypy)
-- [6. Training on Colab Notebook](#6-training-on-colab-notebook)
+- [6. Training in Colab Notebook](#6-training-in-colab-notebook)
 - [7. Deployment using Amazon EC2 and Docker](#7-deployment-using-amazon-ec2-and-docker)
   - [7.1. Create an Amazon EC2 instance](#71-create-an-amazon-ec2-instance)
   - [7.2. Running Docker container in cloud](#72-running-docker-container-in-cloud)
@@ -53,7 +53,7 @@ It's worth mentioning that SageMaker can also be used for [Streamlit](https://st
 
 ## 2. System Requirements
 
-Since most of the model training and deployment will be on AWS, there aren't any system requirements for your local machine. Here is what you need:
+Since most of the model training and deployment will be on AWS, there aren't any system requirements for your local machine. Here is all you need:
 
 - an AWS account ([sign up here](https://aws.amazon.com/resources/create-account/))
 - a [Google Drive](https://drive.google.com/) account (optional, for training on Colab Notebook)
@@ -61,9 +61,9 @@ Since most of the model training and deployment will be on AWS, there aren't any
 
 ## 3. Dataset
 
-The dataset we are going to use in this project is the *[BBC News Classification dataset](http://mlg.ucd.ie/datasets/bbc.html)* with a public license. You can download the dataset from [Kaggle](https://www.kaggle.com/c/learn-ai-bbc/data).
+The dataset we are going to use in this project is the *[BBC News Classification dataset](http://mlg.ucd.ie/datasets/bbc.html)* with a public license. You can download the [dataset](https://www.kaggle.com/c/learn-ai-bbc/data) from [Kaggle](https://www.kaggle.com/).
 
-This dataset is in CSV format and it has two columns: **text** and **category**. It contains 2226 different texts, each labeled under one of 5 categories: **entertainment**, **sport**, **tech**, **business**, or **politics**.
+This dataset is in CSV format and it has two columns: **text** and **category**. It contains 2226 different texts, each labelled under one of 5 categories: **entertainment**, **sport**, **tech**, **business**, or **politics**.
 
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/dataset.png">
@@ -73,6 +73,8 @@ This dataset is in CSV format and it has two columns: **text** and **category**.
 ## 4. Demo
 
 I built an [Online News Classifier](http://44.200.231.137:8501/) using [Streamlit](https://streamlit.io/) running the trained model. You can input or paste any news here, and it will generate predictions of the news category with great accuracy. As simple as this app may looks, underneath it runs a very powerful deep learning model!
+
+Check it out here: [GPT-2 News Classifier](http://44.200.231.137:8501/).
 
 <p align="center">
 <img src="/imgs/2022-01-29-train-and-deploy-fine-tuned-gpt-2-model-using-pytorch-on-amazon-sagemaker-to-classify-news-articles/streamlit-app-demo.png">
@@ -255,7 +257,7 @@ def train(args):
     save_model(model, args.model_dir)
 ```
 
-## 6. Training on Colab Notebook
+## 6. Training in Colab Notebook
 
 When it comes to training Deep Learning models on a cloud notebook, a convenient alternative to Amazon SageMaker is Google's [Colab Notebook](https://colab.research.google.com/?utm_source=scs-index#). It skips all cloud service setup as you need in AWS, and best of all, it offers free CPU/GPU instances for model training (comes with 12 hour limit though)! To use it, simply open your [Google Drive](https://drive.google.com), choose **New->More->Google Colaboratory**. If you want to use GPU to speed up the training, choose **Runtime->Change runtime type->GPU**, and you can write your code there!
 
