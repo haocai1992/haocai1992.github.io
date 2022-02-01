@@ -32,6 +32,8 @@ categories: Data Science
 
 Text classification is a very common task in NLP. It can be used in many applications from spam filtering, sentiment analysis to customer support automation and news categorization. Using Deep Learning language models for large-scale text classification tasks has become quite popular in the industry recently, especially so with the emergence of [Transformers](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) in recent years. Because the size of these Transformer models are often too large to train on local machines, cloud computing platforms (e.g. [GCP](https://cloud.google.com/), [AWS](https://aws.amazon.com/), [Azure](https://azure.microsoft.com/), [Alibabacloud](https://us.alibabacloud.com/)) are commonly used. Therefore in this blog, I want to demonstrate how to train and deploy a fine-tuned GPT-2 model for text classification tasks using Amazon SageMaker.
 
+(This article was also published on [Towards Data Science](https://towardsdatascience.com/).)
+
 ## 1. Introduction
 
 ### 1.1 Transformers: GPT-2 vs BERT
@@ -309,7 +311,7 @@ All source code can be found in this Github Repo: [https://github.com/haocai1992
 ## 9. References
 
 - **Feature image**: Photo by [Patrick Tomasso](https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/machine-learning-news?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText). [https://unsplash.com/photos/BQTHOGNHo08](https://unsplash.com/photos/BQTHOGNHo08).
-- **Transformers**: [https://jalammar.github.io/illustrated-transformer/](https://jalammar.github.io/illustrated-transformer/)
+- **Transformers**:  Alammar, J (2018). The Illustrated Transformer [Blog post]. Retrieved from [https://jalammar.github.io/illustrated-transformer/](https://jalammar.github.io/illustrated-transformer/)
 - **GPT-2 vs BERT**: [https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html](https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html)
 - **BBC News Classification dataset**: D. Greene and P. Cunningham. "Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering", Proc. ICML 2006.
 - **GPT-2 for text classification**: [https://github.com/huggingface/transformers/issues/3168](https://github.com/huggingface/transformers/issues/3168)
