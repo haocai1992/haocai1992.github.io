@@ -325,7 +325,7 @@ All source code can be found in this Github Repo: [https://github.com/haocai1992
 - **GPT-2 vs BERT**: [https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html](https://judithvanstegeren.com/blog/2020/GPT2-and-BERT-a-comparison.html)
 - **BBC News Classification dataset**: D. Greene and P. Cunningham. "Practical Solutions to the Problem of Diagonal Dominance in Kernel Document Clustering", Proc. ICML 2006.
 - **GPT-2 for text classification**: [https://github.com/huggingface/transformers/issues/3168](https://github.com/huggingface/transformers/issues/3168)
-- **"GPT2 For Text Classification using Hugging Face 🤗 Transformers"** (by [George Mihaila](https://gmihaila.medium.com/)): [https://gmihaila.medium.com/gpt2-for-text-classification-using-hugging-face-transformers-574555451832](https://gmihaila.medium.com/gpt2-for-text-classification-using-hugging-face-transformers-574555451832) 
+- **GPT2 For Text Classification using Hugging Face 🤗 Transformers** (by [George Mihaila](https://gmihaila.medium.com/)): [https://gmihaila.medium.com/gpt2-for-text-classification-using-hugging-face-transformers-574555451832](https://gmihaila.medium.com/gpt2-for-text-classification-using-hugging-face-transformers-574555451832) 
 - **Train and deploy models on AWS SageMaker**: [https://medium.com/@thom.e.lane/streamlit-on-aws-a-fully-featured-solution-for-streamlit-deployments-ba32a81c7460](https://medium.com/@thom.e.lane/streamlit-on-aws-a-fully-featured-solution-for-streamlit-deployments-ba32a81c7460)
 - **Deploy Streamlit app on AWS EC2**: [https://medium.com/usf-msds/deploying-web-app-with-streamlit-docker-and-aws-72b0d4dbcf77](https://medium.com/usf-msds/deploying-web-app-with-streamlit-docker-and-aws-72b0d4dbcf77)
 
